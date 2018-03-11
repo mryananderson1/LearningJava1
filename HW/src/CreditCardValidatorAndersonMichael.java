@@ -14,25 +14,23 @@ public class CreditCardValidatorAndersonMichael {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String card = "4847352989263094";
+		//String card = "4847352989263094"; Was used as test value, before implementing user input
 
 		// When you are finished writing the methods below,
 		// uncomment the three lines below to test.
-		//Scanner input = new Scanner(System.in);
-		//System.out.print("Enter a Credit Card Number: ");
-		//String cardNumber = input.nextLine();
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter a Credit Card Number: ");
+		String cardNumber = input.nextLine();
+		input.close(); //Practice closing scanner
 
 		// Should say "Visa"
-		System.out.print("getCompany: " + getCompany(card));
+		System.out.println("This card was issued by: " + getCompany(cardNumber));
 		// Should say "5"
 		getDigit(5); // will print 5
 		// Should say "7"
 		getDigit(55); //will print 10
-		// Should say "52"
-		//System.out.print("sumOfDoubleEvenPlace: " + sumOfDoubleEvenPlace(card)); 
-		// Should say "48"
-		//System.out.print("sumOfOddPlace: " + sumOfOddPlace(card)); 
-		// Should say "true"
+		sumOfDoubleEvenPlace(cardNumber);
+		sumOfOddPlace(cardNumber); 
 		int oddNum = 1;
 		int evenNum = 2;
 		String cardNum = null;
@@ -57,26 +55,31 @@ public class CreditCardValidatorAndersonMichael {
 		"Visa", "Master Card", "American Express", or "Discover Card"
 	*/
 	public static String getCompany(String number){
-		//int card = number.length();
-		//int a = card - number.length();
-		String cardNum = number.substring(0, 0);
-		char cardValue = number.charAt(0);
-		int cardVal = (int) cardValue;
+		String cardNum = number.substring(0, 1);
+		int cardValue = Integer.parseInt(cardNum);
 		String company;
-		//int num = Character.getNumericValue(cardNum);
-		//int b = a + 1;
-		//String company = "";
 		
-		if (cardNum.equalsIgnoreCase("4")) {
+		if (cardValue == 4)
+		{
 			company = "Visa";
-		} else if (cardNum.equalsIgnoreCase("5")) {
+			return company;
+		} 
+		else if (cardValue == 5) 
+		{
 			company = "Master Card";
-		} else if (cardNum.equalsIgnoreCase("6")) {
+			return company;
+		} 
+		else if (cardValue == 6) 
+		{
 			company = "Discover Card";
-		} else if (cardNum.equalsIgnoreCase("3") && cardVal + 1 == 7);
+			return company;
+		} 
+		else if (cardValue == 3 && cardValue + 1 == 7);
+		{
 			company = "American Express";
-		return company;
-	}
+			return company;
+		}
+}
 	
 	// Problem 2 ==================================================================
 	/** 
@@ -88,8 +91,7 @@ public class CreditCardValidatorAndersonMichael {
 		@returns an integer
 	*/
 	public static void getDigit(int number){
-		//int digit = 0;
-		//represents a single digit
+
 		if (number < 10 ) 
 		{
 			System.out.println(number);
@@ -101,7 +103,6 @@ public class CreditCardValidatorAndersonMichael {
 		int sum = 0;
 		sum = Integer.parseInt(digitOne) + Integer.parseInt(digitTwo);
 		System.out.println(sum);
-		//System.out.println(sumOfDigits);
 		}
 	}
 	
@@ -119,16 +120,30 @@ public class CreditCardValidatorAndersonMichael {
 
 		@returns an integer
 	*/
-	/*public static int sumOfDoubleEvenPlace(String number){
-		int oddEven = 0;
-		int even = number.length() - 1;
-		for (int i = 0; i >= 0; i -= 2) {
-			char z = number.charAt(i);
-			int num = Character.getNumericValue(z) * 2;
-			oddEven += getDigit(num);
+	public static void sumOfDoubleEvenPlace(String number){
+		//int oddEven = 0;
+		//long fullNumber = Long.parseLong(number);
+		//int even = number.length() - 1;
+		String cardID = number;
+		for (int i = 0; i < cardID.length() ; i++) {
+			String z = number.substring(i, i + 1);
+			int valueZ = Integer.parseInt(z);
+			int doubleValueZ = valueZ * 2;
+			if (doubleValueZ < 10 ) 
+			{
+				System.out.println("The result was a single digit, its value was: " + doubleValueZ);
+			} else 
+			{
+			String doubleString = Integer.toString(doubleValueZ);
+			String doubleValDigitOne = doubleString.substring(0,1);
+			String doubleValDigitTwo = doubleString.substring(1,2);
+			int sum = 0;
+			sum = Integer.parseInt(doubleValDigitOne) + Integer.parseInt(doubleValDigitTwo);
+			System.out.println("The result was two digits, the sum of those digits was: " + sum);
+			}
+			i++;
 		}
-		return oddEven; 
-	}*/
+	}
 	
 	// Problem 4 ==================================================================
 	/** 
@@ -141,18 +156,16 @@ public class CreditCardValidatorAndersonMichael {
 
 		@returns an integer
 	*/
-	/*public static int sumOfOddPlace(String number){
-		//creates variable oddSum and sets the value to 0
-		int oddSum = 0;
-		int begin = number.length();
-		for (int i = begin; i >= 0; i -=2) {
-			char a = number.charAt(i);
-			int val = Character.getNumericValue(a) * 2;
-			
-			oddSum += getDigit(val);
+	public static void sumOfOddPlace(String number){
+		String cardID = number;
+		int updatedSum = 0;
+		for (int i = 0; i < cardID.length() ; i += 2) {
+			String z = number.substring(i, i + 1);
+			int valueZ = Integer.parseInt(z);
+			updatedSum += valueZ; 
 		}
-		return oddSum;
-	}/*
+		System.out.println("The sum of odd numbers is: " + updatedSum);
+	}
 	
 	// Problem 5 ==================================================================
 	/** 
