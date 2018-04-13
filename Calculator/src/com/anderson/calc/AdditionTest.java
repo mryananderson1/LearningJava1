@@ -9,8 +9,8 @@ class AdditionTest {
 	@Test
 	void test() {
 		Addition addition = new Addition();
-		int sum = addition.addNumbers(2, 2);
-		assertEquals(4, sum);
+		int sum = addition.addNumbers(1, 2);
+		assertEquals(3, sum);
 	}
 
 }
